@@ -62,7 +62,11 @@ train_generator = train_datagen.flow_from_dataframe(
 
 # Membangun model CNN secara berurutan
 model = Sequential([
-    Conv2D(32, (3,3), activation='relu', input_shape=(150,150,3)),  # Layer konvolusi pertama dengan 32 filter, input_shape(panjang, lebar, )
+    Conv2D(32, (3,3), activation='relu', input_shape=(150,150,3)),  # Layer konvolusi pertama dengan 32 filter
+    # input_shape menentukan dimensi input gambar:
+    # - Nilai pertama (150) adalah tinggi gambar yang bisa diubah sesuai dataset
+    # - Nilai kedua (150) adalah lebar gambar yang bisa diubah sesuai dataset
+    # - Nilai ketiga (3) adalah jumlah channel warna (3 untuk RGB, 1 untuk grayscale)
     MaxPooling2D(2,2),  # Pooling layer pertama untuk mengurangi dimensi fitur
     Conv2D(64, (3,3), activation='relu'),  # Layer konvolusi kedua dengan 64 filter
     MaxPooling2D(2,2),  # Pooling layer kedua
@@ -111,4 +115,3 @@ plt.show()
 
 # Menyimpan model akhir setelah training selesai
 model.save('final_model.h5')  # Menyimpan model akhir ke dalam file
-
